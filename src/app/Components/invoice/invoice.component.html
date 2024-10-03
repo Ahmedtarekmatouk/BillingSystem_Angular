@@ -1,0 +1,358 @@
+<div class="row h-100">
+  <!-- <div class="col-2"></div> -->
+  <div class="parent">
+    <!-- <app-info></app-info> -->
+    <div class="container">
+      <div class="pt-1 me-3">
+        <strong>
+          <h4><i class="bi bi-receipt"></i> New Invoice</h4>
+        </strong>
+        <span class="cancel mb-2 text-danger">Cancel</span>
+        <div class="clear"></div>
+        <hr>
+      </div>
+
+      <mat-stepper labelPosition="bottom" #stepper linear style="background-color: white;">
+
+        <mat-step [stepControl]="firstFormGroup" [editable]=true [completed]="firstFormGroup.valid"> 
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Bill Details</ng-template>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="billNumber"> <strong>Bill Number</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="text" class="form-control fw-medium " id="billNumber" [value]="billId" disabled>
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="billDate"> <strong>Bill Date</strong><span class="sign">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="date" class="form-control" id="billDate" placeholder="bill Date"
+                  formControlName="billDate">
+                @if(getBillDate.touched){
+                <ng-container>
+                  @if(getBillDate.hasError('required')){
+                  <div id="emailHelp" class="text-danger">Bill Date is Required</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="clientId"> <strong>Client Name</strong><span class="sign">*</span></label>
+              </div>
+              <div class="col-8">
+                <select id="clientId" class="form-control" formControlName="clientId">
+                  <option disabled value="">-- Choose From Clients --</option>
+                  @for (client of clientsDropList; track $index) {
+                  <option [value]="client.id">{{client.name}}</option>
+                  }
+                </select>
+                @if(getClientId.touched){
+                <ng-container>
+                  @if(getClientId.hasError('required')){
+                  <div id="emailHelp" class="text-danger">Client Name is Required</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+          </form>
+          <div class="ms-4">
+            <button mat-button matStepperNext (click)="firstFormNextClick()">Next</button>
+            @if(firstFormErrors && !firstFormGroup.valid){
+            <div class="text-danger">All fields with * are Required</div>
+            }
+          </div>
+
+        </mat-step>
+
+        <mat-step [stepControl]="secondFormGroup" [editable]=true [completed]="secondFormGroup.valid">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Add Items</ng-template>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="itemId"> <strong>Item Name</strong><span class="sign">*</span></label>
+              </div>
+              <div class="col-8">
+                <select id="itemId" class="form-control" formControlName="itemId" (change)="getItemByID($event)">
+                  <option disabled value="">-- Choose From Items --</option>
+                  @for (item of ItemsDropList; track $index) {
+                  <option [value]="item.id">{{item.name}}</option>
+                  }
+                </select>
+                @if(getItemId.touched){
+                <ng-container>
+                  @if(getItemId.hasError('required')){
+                  <div id="emailHelp" class="text-danger">Item Name is Required</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="sellingPrice"> <strong>Selling Price</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="1" class="form-control" formControlName="sellingPrice" id="sellingPrice"
+                  placeholder="Selling Price" [(ngModel)]="currentInvoiceItem.sellingPrice" (keyup)="calculateItemPrice()">
+                @if(getSellingPrice.touched){
+                <ng-container>
+                  @if(getSellingPrice.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Selling Price Must Be > 0</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="quantity"> <strong>Quantity</strong><span class="sign">*</span></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="1" class="form-control" formControlName="quantity" id="quantity"
+                  placeholder="Quantity" [(ngModel)]="currentInvoiceItem.quantity" (keyup)="calculateItemPrice()" (change)="checkBalance()" >
+                @if(getQuantity.touched){
+                <ng-container>
+                  @if(submitSecondFrom && (getQuantity.hasError('required') || getQuantity.hasError('min') )){
+                  <div id="emailHelp" class="text-danger">Quantity Must Be > 0</div>
+                  }
+                  @if( getQuantity.touched && getQuantity.hasError('checkBalance')){
+                    <div id="emailHelp" class="text-danger">No enought items in stock</div>
+                    }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <!-- <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="discount"> <strong>Discount</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="1" class="form-control" formControlName="discount" id="discount"
+                  placeholder="Discount">
+                @if(getDiscount.touched){
+                <ng-container>
+                  @if(getDiscount.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Discount Can't Be Negative</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div> -->
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="total"> <strong>Total</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="1" class="form-control" formControlName="price" id="total"
+                  placeholder="total" [(ngModel)]="currentInvoiceItem.price" >
+                @if(getPrice.touched){
+                <ng-container>
+                  @if(getPrice.hasError('required') || getPrice.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Quantity Must Be > 0</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                @if( submitSecondFrom && !secondFormGroup.valid){
+                  <!-- @if(getPrice.hasError('required') || getPrice.hasError('min') )
+                  {
+                    <div class="text-danger">total is required and must be larger than 0</div>
+                  } -->
+                  @if(getItemId.hasError('required') )
+                  {
+                   <div class="text-danger">item name is required</div>
+                  } 
+                  @if(getQuantity.hasError('required') || getQuantity.hasError('min') )
+                  {
+                    <div class="text-danger">quantity is required </div>
+                  }  
+                  @if(getPrice.hasError('required')  || getPrice.hasError('min') )
+                  {
+                    <div class="text-danger">total price is required</div>
+                  }             
+                }
+              </div>
+            </div>
+          <div class="row ">
+            <div class="col-11 d-flex justify-content-end">
+              <button class="btn customButton px-4 py-2 me-2 BlueBackground text-white  mb-5" (click)="addInvoiceItem()"> Add </button>
+            </div>
+          </div>
+
+            <div class="row justify-content-center align-items-center">
+              <div class="col-10 mb-4">
+                <table class="table table-hover">
+                  <thead class="table-success ">
+                    <tr>
+                      <th scope="col">Item Code</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Unit</th>
+                      <th scope="col">Quantity</th>
+                      <th scope="col">Selling Price</th>
+                      <th scope="col">Total Price</th>
+                      <th scope="col">Balance</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for(invoiceItem of invoiceItems ; track invoiceItem.itemID)
+                    {
+                      <tr>
+                        <td>{{invoiceItem.itemID}}</td>
+                        <td>{{invoiceItem.name}}</td>
+                        <td>{{invoiceItem.unit}}</td>
+                        <td>{{invoiceItem.quantity}}</td>
+                        <td>{{invoiceItem.sellingPrice}}</td>
+                        <td>{{invoiceItem.price}}</td>
+                        <td>{{invoiceItem.balance - invoiceItem.quantity}}</td>
+                        <td>
+              
+                          <button class="btn p-0" (click)="removeItemByID(invoiceItem.itemID)">
+                            <span class="material-symbols-outlined text-danger" >
+                              delete
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </form>
+
+          <div class="ms-4">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext (click)="secondFormNextClick()">Next</button>
+              @if(secondFormErrors && !secondFormGroup.valid){
+              <div class="text-danger">Please fill all the fields with correct data</div>
+              }
+          </div>
+
+        </mat-step>
+
+        <mat-step [stepControl]="thirdFormGroup" [editable]=true >
+         <ng-template matStepLabel>Other Details</ng-template>
+
+          <form [formGroup]="thirdFormGroup">
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="billTotal"> <strong>Bill Total</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" class="form-control" formControlName="billTotal" id="billTotal"
+                  placeholder="Bill Total" [(ngModel)]="invoice.billTotal">
+              </div>
+            </div>
+
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="percentageDiscount"> <strong>Percentage Discount</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="0" class="form-control" formControlName="percentageDiscount"
+                  id="percentageDiscount" placeholder="Percentage Discount" [(ngModel)]="invoice.discountPercentage" (keyup)="calculateDiscountAmount()">
+                @if(getPercentageDiscount.touched){
+                <ng-container>
+                  @if(getPercentageDiscount.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Percentage Discount Must Be >= 0</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="valueDiscount"> <strong>Value Discount</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="0" class="form-control" formControlName="valueDiscount" id="valueDiscount"
+                  placeholder="Value Discount" [(ngModel)]="invoice.discountAmount" (keyup)="calculateDiscountPercentage()">
+                @if(getValueDiscount.touched){
+                <ng-container>
+                  @if(getValueDiscount.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Value Discount Must Be >= 0</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="net"> <strong>Net Value</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="0" class="form-control" formControlName="net" id="net"
+                  placeholder="Net Value" [(ngModel)]="invoice.net" >
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="paidUp"> <strong>Paid Up</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="0" class="form-control" formControlName="paidUp" id="paidUp"
+                  placeholder="Paid Up"  [(ngModel)]="invoice.paidUp" (keyup)="calculateRest()">
+                @if(getPaidUp.touched){
+                <ng-container>
+                  @if(getPaidUp.hasError('min')){
+                  <div id="emailHelp" class="text-danger">Paid Up Must Be >= 0</div>
+                  }
+                </ng-container>
+                }
+              </div>
+            </div>
+
+            <div class="row align-items-center justify-content-center mb-3">
+              <div class="col-2">
+                <label for="rest"> <strong>Rest</strong></label>
+              </div>
+              <div class="col-8">
+                <input type="number" min="0" class="form-control" formControlName="rest" id="rest" placeholder="Rest" [(ngModel)]="invoice.rest">
+              </div>
+            </div>
+
+
+          </form>
+
+          <div class="ms-4">
+            
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext (click)="createInvoice()">Create Invoice</button>
+            @if(thirdFormErrors && !thirdFormGroup.valid){
+            <div class="text-danger">Please fill all the fields with correct data</div>
+            }
+           
+          </div> 
+        </mat-step>
+
+      </mat-stepper>
+
+    </div>
+  </div>
+</div>

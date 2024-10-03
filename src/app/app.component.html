@@ -1,0 +1,7 @@
+<ng-container *ngIf="isAuthenticated; else loginTemplate">
+    <app-home></app-home>
+</ng-container>
+
+<ng-template #loginTemplate>
+    <app-login></app-login>
+</ng-template>

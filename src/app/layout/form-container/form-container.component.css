@@ -1,0 +1,53 @@
+.parent {
+  width: 100%;
+  background-color: #eeeff1;
+  margin-top: 0px;
+}
+
+.container {
+  background-color: white;
+  border: snow;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 50px 80px 120px;
+  width: 80%;
+}
+
+.pt-1 {
+  padding-top: 1rem;
+}
+.cancel{
+    float:right;
+  font-weight: 500;
+}
+
+.BlueColor{
+  color: #307ec3;
+}
+
+.BlueBackground{
+  background-color: #307ec3;
+}
+
+h4 {
+  display: inline-block;
+}
+
+#emailHelp {
+  margin-left: 165px;
+}
+
+hr {
+  height: 2px;
+  background-color: black;
+}
+
+.btn {
+  float: right;
+  padding: 10px 30px;
+  font-weight: 500;
+}
+
+.clear {
+  clear: both;
+}

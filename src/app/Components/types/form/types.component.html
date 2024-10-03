@@ -1,0 +1,49 @@
+<app-form-container [title]="isEdit?'Edit Type':'Add Type'" [backButtonText]="'Back To List'" [cancelButtonText]="'Cancel'"
+  [saveButtonText]="'Save'" (save)="addType()" (cancel)="navigateToList()" (back)="navigateToList()">
+
+  <form [formGroup]="typeForm" (submit)="addType()">
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="companyName"> <strong>Company Name</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <select id="companyName" class="form-control" formControlName="companyId">
+          <option disabled value="">Choose From Companies</option>
+          <option *ngFor="let x of companyDropList" [value]="x.id">{{x.companyName}}</option>
+        </select>
+      </div>
+      @if(getcompanyName.touched){
+      <ng-container>
+        @if(getcompanyName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Company Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="TypeName"> <strong>Type Name</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="TypeName" placeholder="Type Name" formControlName="name">
+      </div>
+      @if(gettypeName.touched){
+      <ng-container>
+        @if(gettypeName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Type Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center">
+      <div class="col-2 mb-5">
+        <label for="Notes"><strong>Notes</strong><span class="sign"></span></label>
+      </div>
+      <div class="col-8">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Notes"
+          formControlName="notes"></textarea>
+      </div>
+    </div>
+  </form>
+
+</app-form-container>

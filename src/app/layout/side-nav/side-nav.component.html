@@ -1,0 +1,94 @@
+<div class="sidebar" [ngClass]="{ 'showSidebar': isSidebarVisible, 'hideSidebar': !isSidebarVisible }" [@fadeInOut]>
+    <div class="d-flex pb-3 mb-3 align-items-end justify-content-center border-bottom border-dark">
+        <img src="https://images.wuzzuf-data.net/files/company_logo/Pioneers-Solutions-Egypt-9471-1549712851.png"
+            width="40px" height="40px" class="rounded-circle">
+        <h5 class="ms-1">Bills System</h5>
+    </div>
+    <ul>
+        
+        <li>
+            <a routerLink="Dashboard" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    dashboard
+                </span>
+                <span class="menu-text"> Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="AllCompanies" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    edit_square
+                </span>
+                <span class="menu-text"> Company</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="AllTypes" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    category
+                </span>
+                <span class="menu-text">Types</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="AllUnits" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    communities
+                </span>
+                <span class="menu-text">Units</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="AllItems" routerLinkActive="active">
+                <span class="material-symbols-outlined  menu-icon">
+                    stacks
+                </span>
+                <span class="menu-text">Items</span>
+            </a>
+        </li>
+
+        <li>
+            <a routerLink="StockForm" routerLinkActive="active">
+                <span class="material-symbols-outlined  menu-icon">
+                    storage
+                </span>
+                <span class="menu-text">storage</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="AllClients" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    groups
+                </span>
+                <span class="menu-text">Clients</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="employees" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    <span class="material-symbols-outlined">
+                        groups_3
+                    </span>
+                </span>
+                <span class="menu-text">Employees</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="Invoice" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    sell
+                </span>
+                <span class="menu-text">Sales Invoice</span>
+            </a>
+        </li>
+        <li>
+            <a routerLink="SalesReport" routerLinkActive="active">
+                <span class="material-symbols-outlined menu-icon">
+                    summarize
+                </span>
+                <span class="menu-text">Sales Report</span>
+            </a>
+        </li>
+       
+    </ul>
+</div>

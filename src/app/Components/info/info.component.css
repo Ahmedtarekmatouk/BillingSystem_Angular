@@ -1,0 +1,18 @@
+.InfoContainer{
+    width: 80%;
+    margin:20px 50px 20px 120px ;
+}
+.Info {
+    background-color: #b1b1b1;
+    padding: 10px 25px; 
+    border-radius: 20px 20px 0px 0px;
+}
+.required{
+    padding: 25px; 
+    background-color: white;
+    border-radius: 0px 0px 20px 20px;
+}
+.sign{
+    color: #307ec3;
+    font-weight: 500;
+}

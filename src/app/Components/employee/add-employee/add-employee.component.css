@@ -1,0 +1,104 @@
+/* Card container */
+.card {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  /* Card header */
+  .card-header {
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Card body */
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* Form group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Form input */
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Error message styling */
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  /* Submit button */
+  .btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .btn-primary:disabled {
+    background-color: #bdc3c7;
+  }
+
+  /* **
+  ******
+  ***** */
+
+.sign,.cancel{
+    color: #307ec3;
+    font-weight: 500;
+}
+.btn{
+    background-color: #307ec3;
+    float: right;
+    padding: 10px 30px 10px 30px;
+    font-weight: 500;
+}
+input,textarea,select{
+    background-color: #eeeff1;
+}
+.default{
+color: #b4b4b4;
+}
+.cancel{
+    float: right;
+}
+h4{
+    display: inline-block;
+}
+#emailHelp{
+    margin-left: 165px;
+}
+

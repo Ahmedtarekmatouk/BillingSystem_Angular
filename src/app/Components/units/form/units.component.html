@@ -1,0 +1,34 @@
+<app-form-container [title]="isEdit?'Edit Unit':'Add Unit'" [backButtonText]="'Back To List'" [cancelButtonText]="'Cancel'"
+  [saveButtonText]="'Save'" (save)="addUnit()" (cancel)="navigateToList()" (back)="navigateToList()">
+
+<form [formGroup]="unitForm" (submit)="addUnit()">
+  <div class="row align-items-center mb-3">
+    <div class="col-2">
+      <label for="unitName"> <strong>Unit Name</strong><span class="sign">*</span></label>
+    </div>
+    <div class="col-8">
+      <input type="text" class="form-control" id="unitName" placeholder="Unit Name" formControlName="name">
+    </div>
+    @if(getcompanyName.touched){
+    <ng-container>
+      @if(getcompanyName.hasError('required')){
+      <div id="emailHelp" class="text-danger">Unit Name is Required</div>
+      }
+    </ng-container>
+    }
+  </div>
+  <div class="row align-items-center">
+    <div class="col-2 mb-5">
+      <label for="Notes"><strong>Notes</strong><span class="sign"></span></label>
+    </div>
+    <div class="col-8">
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Notes"
+        formControlName="notes"></textarea>
+    </div>
+  </div>
+</form>
+
+</app-form-container>
+
+
+

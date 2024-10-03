@@ -1,0 +1,69 @@
+<app-form-container [title]="isEdit?'Edit Client':'Add Client'" [backButtonText]="'Back To List'" [cancelButtonText]="'Cancel'"
+  [saveButtonText]="'Save'" (save)="Add()" (cancel)="navigateToList()" (back)="navigateToList()">
+
+  <form [formGroup]="clientForm" (submit)="Add()">
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="clientName"><strong>Client Name</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="clientName" placeholder="Client Name" formControlName="name">
+      </div>
+      @if(getclientName.touched){
+      <ng-container>
+        @if(getclientName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Client Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="phone"><strong>Phone</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="Phone" placeholder="Enter your phone number"
+          formControlName="phone">
+      </div>
+      @if(getphone.touched){
+      <ng-container>
+        @if(getphone.hasError('required')){
+        <div id="emailHelp" class="text-danger">Phone is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="number"><strong>Number</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="number" class="form-control" id="number" placeholder="Enter your Number" formControlName="number">
+      </div>
+      @if(getnumber.touched){
+      <ng-container>
+        @if(getnumber.hasError('required')){
+        <div id="emailHelp" class="text-danger">Number is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="address"><strong>Address</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="address" placeholder="Enter your Address" formControlName="address">
+      </div>
+      @if(getaddress.touched){
+      <ng-container>
+        @if(getaddress.hasError('required')){
+        <div id="emailHelp" class="text-danger">Address is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+  </form>
+
+</app-form-container>
+    

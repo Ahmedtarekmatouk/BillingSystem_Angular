@@ -1,0 +1,47 @@
+<section class="vh-100" style="background-color: #f8f9fa;"> 
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card shadow" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 d-none d-md-flex justify-content-center align-items-center">
+              <img src="https://images.wuzzuf-data.net/files/company_logo/Pioneers-Solutions-Egypt-9471-1549712851.png"
+               alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+            </div>
+            <div class="col-md-6 d-flex align-items-center">
+              <div class="card-body p-4 text-dark">
+
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                  <h2 class="fw-bold mb-4 text-center">Welcome Back</h2>
+                  <h5 class="fw-normal mb-4 text-center" style="letter-spacing: 1px;">Sign in to continue</h5>
+
+                  <div class="form-group mb-4">
+                    <input formControlName="name" type="text" id="form2Example17" class="form-control form-control-lg" placeholder="Username" />
+                  </div>
+
+                  <div class="form-group mb-4">
+                    <input formControlName="password" type="password" id="form2Example27" class="form-control form-control-lg" placeholder="Password" />
+                  </div>
+
+                  <div class="text-center mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid">Login</button>
+                  </div>
+
+                  <span *ngIf="errorMessage" class="text-danger d-block text-center mb-3">
+                    {{ errorMessage }}
+                  </span>
+
+                  <div class="text-center">
+                    <a class="small text-muted" href="#!">Forgot password?</a>
+                    <p class="mb-0">Don't have an account? <a href="#!" class="text-primary">Register here</a></p>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

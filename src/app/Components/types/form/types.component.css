@@ -1,0 +1,45 @@
+.parent{
+    width: 83.1%;
+    background-color: #eeeff1;
+    margin-right: 0px;
+}
+.container{
+    background-color: white;
+    border:snow;
+    border-radius: 20px 20px 20px 20px;
+    padding: 20px;
+    margin:20px 50px 80px 120px ;
+    width: 80%;
+}
+.sign,.cancel{
+    color: #307ec3;
+    font-weight: 500;
+}
+.btn{
+    background-color: #307ec3;
+    float: right;
+    padding: 10px 30px 10px 30px;
+    font-weight: 500;
+}
+.clear{
+    clear: both;
+}
+input,textarea,select{
+    background-color: #eeeff1;
+}
+.default{
+color: #b4b4b4;
+}
+.cancel{
+    float: right;
+}
+h4{
+    display: inline-block;
+}
+#emailHelp{
+    margin-left: 165px;
+}
+hr{
+    height: 2px;
+    background-color: black;
+}

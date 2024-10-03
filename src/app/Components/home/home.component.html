@@ -1,0 +1,8 @@
+<div>
+    <app-side-nav></app-side-nav>
+</div>
+
+<div class="content" [ngClass]="isSidebarVisible ? 'with-sidebar' : 'without-sidebar'">
+    <app-nav></app-nav>
+    <router-outlet></router-outlet>
+</div>

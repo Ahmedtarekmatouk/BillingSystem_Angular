@@ -1,0 +1,82 @@
+<div class="row h-100">
+    <!-- <div class="col-2"></div> -->
+    <div class="parent">
+       <!-- <app-info></app-info> -->
+        <div class="container">
+            <div class="Header pt-3">
+                <strong><h4><i class="bi bi-receipt"></i> Sales Report</h4> </strong>
+                <span class="cancel mb-2">Cancel</span>
+                <div class="clear"></div>
+                <hr>
+            </div> 
+            <form [formGroup]="reportForm" (submit)="addProduct($event)">
+                <div class="row align-items-center mb-3">
+                  <div class="col-2">
+                    <label for="from"> <strong>From</strong><span class="sign">*</span></label>
+                  </div>
+                  <div class="col-8">
+                    <input type="date" id="from" class="form-control" formControlName="from"/>
+                      <!-- <option selected>Choose From Date</option> -->
+                  <!-- </input> -->
+                  </div>
+                  @if(getFrom.touched){
+                    <ng-container>
+                        @if(getFrom.hasError('required')){
+                            <div id="emailHelp" class="text-danger">Date is Required</div>
+                        }
+                    </ng-container>
+                  }
+                </div>
+                <div class="row align-items-center mb-3">
+                  <div class="col-2">
+                    <label for="to"><strong>To</strong> <span class="sign">*</span></label>
+                  </div>
+                  <div class="col-8">
+                    <input type="date" id="to" class="form-control" formControlName="to"/>
+                      <!-- <option class="default">Choose From Date</option>
+                    </select> -->
+                  </div>
+                  @if(getTo.touched){
+                    <ng-container>
+                        @if(getTo.hasError('required')){
+                            <div id="emailHelp" class="text-danger">Date is Required</div>
+                        }
+                    </ng-container>
+                  }
+                </div>         
+                <div>
+                    <button type="submit" class="btn btn-primary m-5">Download</button>
+                </div>
+                <div class="clear"></div>
+              </form>
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Invoice Number</th>
+                    <th scope="col">Bill Total</th>
+                    <th scope="col">Bill Date</th>
+                    <th scope="col">Discount Percentage</th>
+                    <th scope="col">Net Amount</th>
+                    <th scope="col">Paid Up</th>
+                    <th scope="col">Remaining Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let invoice of invoices">
+                    <th scope="row">{{ invoice.id }}</th>
+                    <td>{{ invoice.number }}</td>
+                    <td>{{ invoice.billTotal }}</td>
+                    <td>{{ invoice.billDate | date: 'yyyy-MM-dd HH:mm' }}</td> <!-- Formatting the date -->
+                    <td>{{ invoice.discountPercentage }}%</td>
+                    <td>{{ invoice.net }}</td>
+                    <td>{{ invoice.paidUp }}</td>
+                    <td>{{ invoice.rest }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+        </div>
+    </div>
+    

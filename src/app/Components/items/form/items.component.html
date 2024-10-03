@@ -1,0 +1,147 @@
+<app-form-container [title]="isEdit?'Edit Item':'Add Item'" [backButtonText]="'Back To List'" [cancelButtonText]="'Cancel'"
+  [saveButtonText]="'Save'" (save)="addItemData()" (cancel)="navigateToList()" (back)="navigateToList()">
+
+  <form [formGroup]="itemForm" (submit)="addItemData()">
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="companyName"> <strong>Company Name</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <select id="companyName" #ComapnyDDL class="form-control" formControlName="companyId"
+          (change)="CompanyChange(ComapnyDDL.value)">
+          <option disabled value="">Choose From Companies</option>
+          <option *ngFor="let x of companyNames" [value]="x.id">{{x.companyName}}</option>
+        </select>
+      </div>
+      @if(getcompanyName.touched){
+      <ng-container>
+        @if(getcompanyName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Company Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="typeName"><strong>Type Name</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <select id="typeName" class="form-control" formControlName="typeId">
+          <option class="default" disabled selected value="">Choose From Types</option>
+          <option *ngFor="let x of filteredTypes ;let i=index" [value]="i+1">{{x.name}}</option>
+        </select>
+      </div>
+      @if(gettypeName.touched){
+      <ng-container>
+        @if(gettypeName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Type Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="typeName"><strong>Unit Name</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <select id="unitName" class="form-control" formControlName="unitId" name="unitName">
+          <option class="default" disabled selected value="">Choose From Units</option>
+          <option *ngFor="let x of unitsName" [value]="x.id">{{x.name}}</option>
+        </select>
+      </div>
+      @if(getunit.touched){
+      <ng-container>
+        @if(getunit.hasError('required')){
+        <div id="emailHelp" class="text-danger">Type Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="ItemName"><strong>Item Name</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="ItemName" placeholder="Item Name" formControlName="name">
+      </div>
+      @if(getitemName.touched){
+      <ng-container>
+        @if(getitemName.hasError('required')){
+        <div id="emailHelp" class="text-danger">Item Name is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="SellingPrice"><strong>Selling Price</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-3">
+        <input type="number" class="form-control" id="SellingPrice" placeholder="Selling Price"
+          formControlName="sellingprice">
+      </div>
+      @if(getsellingPrice.touched){
+      <ng-container>
+        @if(getsellingPrice.hasError('required')){
+        <div id="emailHelp" class="text-danger">Selling Price is Required</div>
+        }
+        @if(getsellingPrice.hasError('min')){
+        <div id="emailHelp" class="text-danger">SELLING PRICE Must be Greater
+          than or equal Zero</div>
+        }
+      </ng-container>
+      }
+      <div class="col-2">
+        <label for="BuyingPrice"><strong>Buying Price</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-3">
+        <input type="number" class="form-control" id="BuyingPrice" placeholder="Buying Price"
+          formControlName="buyingprice">
+      </div>
+      @if(getbuyingPrice.touched){
+      <ng-container>
+        @if(getbuyingPrice.hasError('required')){
+        <div id="emailHelp" class="text-danger">BUYING PRICE is Required</div>
+        }
+        @if(getbuyingPrice.hasError('min')){
+        <div id="emailHelp" class="text-danger">BUYING PRICE Must be Greater than or
+          equal Zero</div>
+        }
+      </ng-container>
+      }
+    </div>
+
+ <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="openingBalance"><strong>opening Balance</strong> <span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="number" class="form-control" id="openingBalance" placeholder="opening Balance" formControlName="openingBalance">
+      </div>
+      @if(getopeningbalance.touched){
+      <ng-container>
+        @if(getopeningbalance.hasError('required')){
+        <div id="emailHelp" class="text-danger">opening Balance is Required</div>
+        }
+      </ng-container>
+      }
+    </div>
+    
+    <div class="row align-items-center">
+      <div class="col-2 mb-5">
+        <label for="Notes"><strong>Notes</strong><span class="sign"></span></label>
+      </div>
+      <div class="col-8">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Notes"
+          formControlName="notes"></textarea>
+      </div>
+    </div>
+    <!-- <p>{{itemForm.value | json}}</p> -->
+  </form>
+
+</app-form-container>
+
+

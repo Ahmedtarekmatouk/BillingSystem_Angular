@@ -1,0 +1,31 @@
+body {
+    font-family: 'Arial', sans-serif; /* Change font for a fresh look */
+  }
+  
+  .card {
+    background-color: #ffffff; /* Light background for the card */
+  }
+  
+  .card-body {
+    padding: 2rem; /* Add more padding for a spacious feel */
+  }
+  
+  .form-control {
+    border: 1px solid #ced4da; /* Subtle border */
+    border-radius: 0.5rem; /* Rounded corners */
+  }
+  
+  .btn-primary {
+    background-color: #29698b; /* Primary button color */
+    border: none; /* Remove border */
+    border-radius: 0.5rem; /* Rounded button corners */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
+  .text-muted {
+    color: #6c757d; /* Muted text color */
+  }
+  

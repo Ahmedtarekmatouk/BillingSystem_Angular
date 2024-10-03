@@ -1,0 +1,29 @@
+<app-form-container [title]="isEdit?'Edit Company':'Add Company'" [backButtonText]="'Back To List'" [cancelButtonText]="'Cancel'"
+  [saveButtonText]="'Save'" (save)="addCompany()" (cancel)="navigateToCompanyList()" (back)="navigateToCompanyList()">
+
+  <form [formGroup]="companyForm">
+    <div class="row align-items-center mb-3">
+      <div class="col-2">
+        <label for="companyName"> <strong>Company Name</strong><span class="sign">*</span></label>
+      </div>
+      <div class="col-8">
+        <input type="text" class="form-control" id="companyName" placeholder="Company Name"
+          formControlName="companyName">
+      </div>
+      <div *ngIf="getcompanyName.touched && getcompanyName.hasError('required')">
+        <div id="emailHelp" class="text-danger">Company Name is Required</div>
+      </div>
+    </div>
+
+    <div class="row align-items-center">
+      <div class="col-2 mb-5">
+        <label for="Notes"><strong>Notes</strong></label>
+      </div>
+      <div class="col-8">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" placeholder="Notes"
+          formControlName="notes"></textarea>
+      </div>
+    </div>
+  </form>
+
+</app-form-container>
